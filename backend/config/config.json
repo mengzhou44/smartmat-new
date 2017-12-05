@@ -1,0 +1,12 @@
+{
+    "test": {
+        "PORT": 3000,
+        "MONGODB_URI": "mongodb://localhost:27017/SmartMatTest",
+        "JWT_SECRET": "EKFJDVNDKHREIE934343A3"
+    },
+    "development": {
+        "PORT": 3000,
+        "MONGODB_URI": "mongodb://localhost:27017/SmartMat",
+        "JWT_SECRET": "AHSIEKDCKE43EREED"
+    }
+}
