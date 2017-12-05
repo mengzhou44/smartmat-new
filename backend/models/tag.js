@@ -7,7 +7,7 @@ module.exports.Tag = mongoose.model('Tag', {
         minilength: 1,
         trim: true
     },
-    matid: {
+    matId: {
         type: String,
         required: true,
         minilength: 1,
