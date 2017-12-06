@@ -4,7 +4,7 @@ const { ObjectID } = require('mongodb');
 
 const { app } = require('../index');
 
-const { tags, populateTags } = require('../tests/seed');
+const { tags, populateTags } = require('./seeds/tag-seed');
 
 beforeEach(populateTags);
 

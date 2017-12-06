@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports.Tag = mongoose.model('Client', {
+module.exports.Client = mongoose.model('Client', {
     name: {
         type: String,
         required: true,

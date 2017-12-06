@@ -13,6 +13,8 @@ const app = express();
 app.use(bodyParser.json());
 
 require('./routes/tags-routes')(app);
+require('./routes/clients-routes')(app);
+
 
 app.get('/', (req, res) => {
     res.status(200).send('<h1>Hello, World!</h1>');
