@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 require('./routes/tags-routes')(app);
 require('./routes/clients-routes')(app);
+require('./routes/users-routes')(app);
 
 
 app.get('/', (req, res) => {

@@ -7,24 +7,24 @@ const { User } = require('../models/user');
 
 const { fakeUser, users, populateUsers, clients, populateClients } = require('./seeds/client-seed');
 
-beforeEach(() => {
-    populateClients();
-    populateUsers();
-});
+
+beforeEach(populateClients);
+beforeEach(populateUsers);
 
 describe('POST /user', () => {
     it('should not create an user if email is invalid', (done) => {
-
+        let user = Object.assign({}, fakeUser);
+        user.email = 'meng@eeer';
         request(app)
             .post('/users')
-            .send({ email: 'meng@eeer' })
+            .send(user)
             .expect(400)
             .end((err, res) => {
                 if (err) {
                     return done(err);
                 }
                 User.find({})
-                    .then(clients => {
+                    .then(users => {
                         expect(users.length).toBe(2);
                         done();
                     })
@@ -33,9 +33,11 @@ describe('POST /user', () => {
     }),
 
         it('should not create an user if clientId is empty', (done) => {
+            let user = Object.assign({}, fakeUser);
+            user.clientId = ''
             request(app)
                 .post('/users')
-                .send({ email: 'meng@eeer' })
+                .send(user)
                 .expect(400)
                 .end((err, res) => {
                     if (err) {
@@ -50,26 +52,23 @@ describe('POST /user', () => {
                 });
         }),
 
-
-        it('should able to create a client', (done) => {
-            const name = clients[0].name;
+        it('should create an user', (done) => {
+            let user = Object.assign({}, fakeUser);
             request(app)
-                .post('/clients')
-                .send({ name })
+                .post('/users')
+                .send(user)
                 .expect(200)
-                .expect(res => {
-                    expect(res.body.name).toBe(name);
-                })
                 .end((err, res) => {
                     if (err) {
                         return done(err);
                     }
-                    Client.findOne({ name })
-                        .then(client => {
-                            expect(client.name).toBe(name);
+                    User.find({})
+                        .then(users => {
+                            expect(users.length).toBe(3);
                             done();
                         })
                         .catch(e => done(e));
                 });
         })
-});
+
+}); 
